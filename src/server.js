@@ -1,7 +1,9 @@
 import initApp from "./app/index.js";
+import { config } from "./config/index.js";
+
 
 const app = initApp();
 
-const server = app.listen(8080, () => {
-  console.info("Server listen on http://localhost:8080");
+const server = app.listen(config.PORT, () => {
+  console.info(`Server listen on http://localhost:${config.PORT}`);
 });
