@@ -13,7 +13,7 @@ const initApp = () => {
   // =============================//=========================
   
   // Connection routes. --//-- Rutas de conexión.
-  app.use('/api/product', productsRouter);
+  app.use('/api/products', productsRouter);
   app.use('/api/carts', cartsRouter);
   
   // =============================//=========================
