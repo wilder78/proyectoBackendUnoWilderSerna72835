@@ -3,14 +3,14 @@ import fs from "fs";
 import path from "path";
 import { config } from "../config/index.js";
 import { v4 as uuidv4 } from "uuid";
-import { validateInputProducts } from "../middlewares/validationMiddleware.js";
+import { validateInputProducts } from "../middlewares/index.js";
 
 
 
 
 export const productsRouter = Router();
 
-const pathToProducts = path.join(config.dirname, "/src/data/products.json");
+const pathToProducts = path.join(config.dirname, "./src/data/products.json");
 
 console.log(pathToProducts);
 
