@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { multerUploaderMiddleware } from "../middleware/index.js";
 
 export const ProductRouter = Router();
 
@@ -43,11 +44,15 @@ ProductRouter.get("/", (req, res) => {
 // Accedamos desde el browser al registro de un nuevo producto a: http://127.0.0.1:8080/api/products.
 ProductRouter.post(
   "/",
-  // multerUploaderMiddleware.fields([
-  //   { name: "producto1", maxCount: 1 },
-  //   { name: "producto2", maxCount: 2 },
-  // ]),
+  multerUploaderMiddleware.fields([
+    { name: "producto1", maxCount: 1 },
+    { name: "producto2", maxCount: 1 },
+  ]),
   (req, res) => {
+
+    console.log(req.file);
+
+    console.log(req.files);
 
     const product = req.body;
 
@@ -78,70 +83,3 @@ ProductRouter.post(
   }
 );
 
-
-// Accedemos desde el browser al llamado por id en: http://127.0.0.1:8080/api/products/:idProd
-// ProductRouter.get("/api/products/:idProd", (req, res) => {
-//   try {
-//     const { idProd: idString } = req.params;
-//     const idProd = parseInt(idString, 10); // Conversión más clara
-
-//     if (isNaN(idProd)) {
-//       return res
-//         .status(400)
-//         .json({ message: "Por favor coloque un número válido como ID" });
-//     }
-
-//     const product = products.find((product) => product.idProd === idProd);
-
-//     if (!product) {
-//       return res.status(404).json({ message: "Producto no encontrado" });
-//     }
-
-//     res.status(200).json({ product }); // Código 200 explícito
-//   } catch (error) {
-//     res
-//       .status(500)
-//       .json({ errorMessage: "Error en el servidor", details: error.message });
-//   }
-// });
-
-// Accedemos desde el browser para actualizar un producto en: http://127.0.0.1:8080/api/products/:id
-// ProductRouter.put("/api/products/:idProd", (req, res) => {
-//   const { idProd } = req.params;
-//   const updatedData = req.body;
-
-//   // Buscar el índice del producto en el array
-//   const productIndex = products.findIndex(
-//     (product) => product.idProd === Number(idProd)
-//   );
-
-//   if (productIndex === -1) {
-//     return res
-//       .status(404)
-//       .json({ message: `No se encontró el producto con el ID: ${idProd}` });
-//   }
-
-//   // Validación de datos entrantes
-//   if (
-//     !updatedData.title ||
-//     !updatedData.description ||
-//     !updatedData.code ||
-//     typeof updatedData.price !== "number" ||
-//     typeof updatedData.status !== "boolean" ||
-//     typeof updatedData.stock !== "number" ||
-//     !updatedData.category ||
-//     !Array.isArray(updatedData.thumbnails)
-//   ) {
-//     return res.status(400).json({
-//       message: "Error: Datos incompletos o incorrectos para la actualización.",
-//     });
-//   }
-
-//   // Mantener los valores previos si no se pasan en updatedData
-//   products[productIndex] = { ...products[productIndex], ...updatedData };
-
-//   res.status(200).json({
-//     message: `Producto con ID ${idProd} actualizado correctamente.`,
-//     data: products[productIndex],
-//   });
-// });

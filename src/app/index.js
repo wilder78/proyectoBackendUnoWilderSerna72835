@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import { config } from "../config/index.js";
 import { ProductRouter } from "../routes/products.js";
+import { logger } from "../middleware/index.js";
 
 const initApp = () => {
   const app = express();
@@ -13,7 +14,8 @@ const initApp = () => {
   // Ruta para mostrar vista por default
   app.use(express.static(path.join(config.dirname, "public")));
 
-  // app.use(express.static('public'));
+  // Autenticación con middleware.
+  app.use(logger);
 
   // Enlace de exportación de las rutas.
   app.use('/api/products', ProductRouter);
