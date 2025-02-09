@@ -11,6 +11,7 @@ export const CartsRouter = Router();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const pathToCarts = join(__dirname, "../data/carts.json");
 
+
 // =============================== // =================================
 //                    Accesos desde el metodo API.
 // =============================== // =================================
@@ -27,19 +28,18 @@ CartsRouter.get("/", async (req, res) => {
 });
 
 
-
 // Crear un nuevo carrito
 CartsRouter.post("/", validateInputCarts, async (req, res) => {
   try {
     let cartsString = await fs.promises.readFile(pathToCarts, "utf-8");
     const carts = JSON.parse(cartsString);
 
-    // 📌 Asegurar que req.body no esté vacío
+    // Asegurar que req.body no esté vacío
     if (!req.body || Object.keys(req.body).length === 0) {
       return res.status(400).send({ error: "No se enviaron datos en la solicitud" });
     }
 
-    const { products = [] } = req.body; // 📌 Un carrito almacena productos
+    const { products = [] } = req.body; // Un carrito almacena productos
 
     // 📌 Validar que `products` sea un array
     if (!Array.isArray(products) || products.length === 0) {
@@ -49,7 +49,7 @@ CartsRouter.post("/", validateInputCarts, async (req, res) => {
     // Crear el nuevo carrito
     const cart = {
       idCart: uuidv4(),
-      products, // 📌 Se espera un array de productos
+      products, // Se espera un array de productos
     };
 
     carts.push(cart);
