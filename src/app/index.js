@@ -1,8 +1,9 @@
 import express from "express";
 import path from "path";
 import { config } from "../config/index.js";
-import { ProductRouter } from "../routes/products.js";
+import { ProductRouter, CartsRouter } from "../routes/index.js";
 import { logger } from "../middleware/index.js";
+
 
 const initApp = () => {
   const app = express();
@@ -11,14 +12,15 @@ const initApp = () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  // Ruta para mostrar vista por default
-  app.use(express.static(path.join(config.dirname, "public")));
+  // Route to display view by default. --//-- Ruta para mostrar vista por por defecto.
+  // app.use(express.static(path.join(config.dirname, "public")));
 
-  // Autenticación con middleware.
-  app.use(logger);
+  // Authentication with middleware. --//-- Autenticación con el software intermedio.
+  // app.use(logger);
 
-  // Enlace de exportación de las rutas.
+  // Export links for routes. --//-- Enlaces de exportación de las rutas.
   app.use('/api/products', ProductRouter);
+  app.use('/api/carts', CartsRouter)
 
   return app;
 };

@@ -1,0 +1,27 @@
+[
+	{
+		"idProd": 1,
+		"title": "Disco de freno Galfer Wave AKT 125 NKD",
+		"description": "Disco de freno de alto desempeño con diseño Wave para AKT 125 NKD EIII.",
+		"code": "ms-01",
+		"price": 120000,
+		"status": true,
+		"stock": 30,
+		"category": "repuesto",
+		"thumbnails": []
+	},
+	{
+		"idProd": 2,
+		"title": "Disco de freno Brembo Yamaha NMAX",
+		"description": "Disco de freno delantero original Brembo para Yamaha GPD155-A (NMAX155).",
+		"code": "ms-02",
+		"price": 200000,
+		"status": true,
+		"stock": 15,
+		"category": "repuesto",
+		"thumbnails": []
+	},
+	{
+		"idProd": "3c09d922-1e64-4c8b-98cf-b3aedf4f1559"
+	}
+]

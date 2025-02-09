@@ -1,0 +1,17 @@
+[
+  {
+    "idCart": "db806afa-fd3a-417f-8eaf-e85f04a61d40",
+    "products": [
+      {
+        "code": "ms-10",
+        "amount": 2,
+        "price": 5000
+      },
+      {
+        "code": "ms-03",
+        "amount": 1,
+        "price": 12000
+      }
+    ]
+  }
+]

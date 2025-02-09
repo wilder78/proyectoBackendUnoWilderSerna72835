@@ -1,85 +1,63 @@
 import { Router } from "express";
-import { multerUploaderMiddleware } from "../middleware/index.js";
+import fs from "fs";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+import { v4 as uuidv4 } from "uuid";
+import { validateInputProducts } from "../middleware/validationMiddleware.js";
 
 export const ProductRouter = Router();
 
-const products = [
-  {
-    idProd: 1,
-    title: "Disco de freno Galfer Wave AKT 125 NKD",
-    description:
-      "Disco de freno de alto desempeño con diseño Wave para AKT 125 NKD EIII.",
-    code: "ms-01",
-    price: 120000,
-    status: true,
-    stock: 30,
-    category: "repuesto",
-    thumbnails: [],
-  },
-  {
-    idProd: 2,
-    title: "Disco de freno Brembo Yamaha NMAX",
-    description:
-      "Disco de freno delantero original Brembo para Yamaha GPD155-A (NMAX155).",
-    code: "ms-02",
-    price: 200000,
-    status: true,
-    stock: 15,
-    category: "repuesto",
-    thumbnails: [],
-  },
-];
+// Definir la ruta correcta del archivo JSON
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const pathToProducts = join(__dirname, "../data/products.json");
+
 
 // =============================== // =================================
 //                    Accesos desde el metodo API.
 // =============================== // =================================
 
-
 // Accedamos desde el browser al llamado de los productos a: http://127.0.0.1:8080/api/products
-ProductRouter.get("/", (req, res) => {
-  res.send({ message: "Productos", data: products });
+ProductRouter.get("/", async (req, res) => {
+  try {
+    let productsString = await fs.promises.readFile(pathToProducts, "utf-8");
+    const products = JSON.parse(productsString);
+    res.send({ products });
+  } catch (error) {
+    res.status(500).send({ error: "Error al leer los productos" });
+  }
 });
 
-
 // Accedamos desde el browser al registro de un nuevo producto a: http://127.0.0.1:8080/api/products.
-ProductRouter.post(
-  "/",
-  multerUploaderMiddleware.fields([
-    { name: "producto1", maxCount: 1 },
-    { name: "producto2", maxCount: 1 },
-  ]),
-  (req, res) => {
+ProductRouter.post("/", validateInputProducts, async (req, res) => {
+  let productsString = await fs.promises.readFile(pathToProducts, "utf-8");
+  const products = JSON.parse(productsString);
 
-    console.log(req.file);
+  const {
+    title,
+    description,
+    code,
+    price,
+    status,
+    stock,
+    category,
+    thumbnails,
+  } = req.body;
 
-    console.log(req.files);
+  const product = {
+    idProd: uuidv4(),
+    title,
+    description,
+    code,
+    price,
+    status,
+    stock,
+    category,
+    thumbnails,
+  };
 
-    const product = req.body;
+  products.push(product);
 
-    if (
-      !product.title ||
-      !product.description ||
-      !product.code ||
-      !product.price ||
-      !product.status ||
-      !product.stock ||
-      !product.category ||
-      !product.thumbnails
-    ) {
-      return res.status(400).send({
-        message: "Error al crear el producto",
-        error: "Datos incompletos",
-      });
-    }
-
-    product.idProd = products.length + 1;
-
-    products.push(product);
-
-    return res.status(204).send({
-      message: "Producto registrado.",
-      data: { product },
-    });
-  }
-);
-
+  const productsStringified = JSON.stringify(products, null, "\t");
+  await fs.promises.writeFile(pathToProducts, productsStringified);
+  res.send({message: "Producto creado", data: product})
+});
