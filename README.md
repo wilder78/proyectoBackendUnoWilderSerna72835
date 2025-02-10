@@ -1,0 +1,1 @@
+presento problemas al registrar productos solo registra el codigo o el id.
