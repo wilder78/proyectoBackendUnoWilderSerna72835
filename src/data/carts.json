@@ -1,0 +1,37 @@
+[
+  {
+    "idCart": "db806afa-fd3a-417f-8eaf-e85f04a61d40",
+    "products": [
+      {
+        "code": "ms-10",
+        "amount": 2,
+        "price": 5000
+      },
+      {
+        "code": "ms-03",
+        "amount": 1,
+        "price": 12000
+      }
+    ]
+  },
+  {
+    "idCart": "e0668f18-1a4b-4cc2-aabf-f6d6ce7e25a3",
+    "products": [
+      {
+        "code": "ms-14",
+        "amount": 2,
+        "price": 5000
+      },
+      {
+        "code": "ms-03",
+        "amount": 1,
+        "price": 12000
+      },
+      {
+        "code": "ms-13",
+        "amount": 6,
+        "price": 15000
+      }
+    ]
+  }
+]

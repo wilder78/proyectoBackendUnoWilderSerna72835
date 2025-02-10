@@ -1,0 +1,43 @@
+  [
+    {
+      "idUser": 1,
+      "nombres": "Carlos Andrés",
+      "apellidos": "Gómez Pérez",
+      "email": "carlos.gomez@example.com",
+      "telefono": "3001234567",
+      "edad": 28
+    },
+    {
+      "idUser": 2,
+      "nombres": "María Fernanda",
+      "apellidos": "López Rivera",
+      "email": "maria.lopez@example.com",
+      "telefono": "3109876543",
+      "edad": 32
+    },
+    {
+      "idUser": 3,
+      "nombres": "Juan Sebastián",
+      "apellidos": "Martínez Rojas",
+      "email": "juan.martinez@example.com",
+      "telefono": "3206543210",
+      "edad": 25
+    },
+    {
+      "idUser": 4,
+      "nombres": "Laura Camila",
+      "apellidos": "Ramírez Torres",
+      "email": "laura.ramirez@example.com",
+      "telefono": "3157891234",
+      "edad": 30
+    },
+    {
+      "idUser": 5,
+      "nombres": "Andrés Felipe",
+      "apellidos": "Castro Muñoz",
+      "email": "andres.castro@example.com",
+      "telefono": "3014567890",
+      "edad": 27
+    }
+  ]
+
