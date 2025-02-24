@@ -1,0 +1,11 @@
+Mongo Atlas => https://www.mongodb.com/products/platform/atlas-database
+Mongoose => https://mongoosejs.com/
+
+
+# =============//================//==================//===================//
+#   Usuario y contraseña en mongoAtlas
+#   usuario:company
+#   password:M7D5W8tE8mIR72la
+#   direccionIp
+#   0.0.0.0/0
+# =============//================//==================//===================//
